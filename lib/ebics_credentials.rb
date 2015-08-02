@@ -18,12 +18,15 @@ class EbicsCredentials
   end
 
   extend Forwardable
-  def_delegator :@credentials, :key
-  def_delegator :@credentials, :passphrase
-  def_delegator :@credentials, :url
-  def_delegator :@credentials, :host_id
-  def_delegator :@credentials, :partner_id
-  def_delegator :@credentials, :user_id
+
+  attr_reader :credentials
+
+  def_delegators :@credentials, :key, :key=
+  def_delegators :@credentials, :passphrase, :passphrase=
+  def_delegators :@credentials, :url, :url=
+  def_delegators :@credentials, :host_id, :host_id=
+  def_delegators :@credentials, :partner_id, :partner_id=
+  def_delegators :@credentials, :user_id, :user_id=
 
   def self.from_encoded_json(encoded_json)
     raise Errors::Empty if encoded_json.nil? || encoded_json.empty? 
